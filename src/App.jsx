@@ -37,7 +37,10 @@ export default function App() {
         </div>
         <div className="order-card">
           <h2>Your Cart (0)</h2>
-          <img src={EmptyBasket} alt="" />
+          <div className="items-card">
+            <img src={EmptyBasket} alt="" />
+            <h5>Your added items will appear here</h5>
+          </div>
         </div>
       </div>
     </>

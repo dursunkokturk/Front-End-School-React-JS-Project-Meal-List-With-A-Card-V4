@@ -26,6 +26,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 32px;
 }
 
 .container .food-card .product-informations {
@@ -83,10 +84,23 @@ body {
 }
 
 .container .order-card {
-  margin-left: 24px;
+  margin-inline: 24px;
+  margin-bottom: 64px;
 }
 
 .container .order-card h2 {
-  margin-top: 24;
-  margin-left: 24;
+  color: #C73B0F;
+  font-weight: 700;
+
+  margin-bottom: 24px;
+}
+
+.container .order-card .items-card img {
+  padding: 16px 75px 30px 75px;
+}
+
+.container .order-card .items-card h5 {
+  font-size: 14px;
+  color: #87635A;
+  text-align: center;
 }
