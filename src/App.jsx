@@ -7,11 +7,12 @@ import './App.css'
 // Price Data'sini Kendimiz Uretiyoruz
 const generatePrice = (id) => {
   const base = (id * 7 + 13) % 25;
-  return (base + 5 + 0.99).toFixed(2);
+  return Number((base + 5 + 0.99).toFixed(2));
 };
 
 export default function App() {
 
+  const [loading, setLoading] = useState(true);
   const [recipes, setRecipes] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -24,7 +25,12 @@ export default function App() {
           price: generatePrice(recipe.id)
         }))
         setRecipes(recipesWithPrice)
+        setLoading(false)
       })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false)
+      });
     // .then(console.log);
   }, [])
 
@@ -49,6 +55,17 @@ export default function App() {
     })
   }
 
+  // Sepetteki Toplam Urun Sayisi
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  if (loading) {
+    return (
+      <div className="loading">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="container">
@@ -60,8 +77,8 @@ export default function App() {
             {recipes.map((recipe) => (
               <div key={recipe.id} className='product-informations'>
                 <div className="image-wrapper">
-                  <img src={recipe.image} className='product-photo' alt="" />
-                  <button>
+                  <img src={recipe.image} className='product-photo' alt={recipe.name} />
+                  <button onClick={() => addToCart(recipe)}>
                     <img src={ShoppingCard} alt="" />
                     Add to Cart
                   </button>
@@ -73,11 +90,35 @@ export default function App() {
             ))}
           </div>
           <div className="order-card">
-            <h2>Your Cart (0)</h2>
-            <div className="items-card">
-              <img src={EmptyBasket} alt="" />
-              <h5>Your added items will appear here</h5>
-            </div>
+            <h2>Your Cart ({totalItems})</h2>
+
+            {/* Kosullu Guncelleme */}
+            {cart.length === 0 ? (
+              <div className="items-card">
+                <img src={EmptyBasket} alt="" />
+                <h5>Your added items will appear here</h5>
+              </div>
+            ) : (
+              <div className="cart-items">
+                {cart.map((item) => (
+                  <div key={item.id} className="cart-item">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className='cart-item-img'
+                    />
+                    <div className="cart-item-info">
+                      <p className='cart-item-name'>{item.name}</p>
+                      <span className='cart-item-cuisine'>{item.cuisine}</span>
+                      <div className="cart-item-bottom">
+                        <span className='cart-item-quantity'>{item.quantity}</span>
+                        <span className='cart-item-price'>${(item.price * item.quantity).toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
