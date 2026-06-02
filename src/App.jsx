@@ -15,8 +15,6 @@ export default function App() {
   const [recipes, setRecipes] = useState([]);
   const [cart, setCart] = useState([]);
 
-  cartItems = [id, recipe.id, recipes.cuisine, recipe.name, recipe.price];
-
   useEffect(() => {
     fetch('https://dummyjson.com/recipes')
       .then(response => response.json())
