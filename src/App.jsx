@@ -13,6 +13,9 @@ const generatePrice = (id) => {
 export default function App() {
 
   const [recipes, setRecipes] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  cartItems = [id, recipe.id, recipes.cuisine, recipe.name, recipe.price];
 
   useEffect(() => {
     fetch('https://dummyjson.com/recipes')
@@ -26,6 +29,27 @@ export default function App() {
       })
     // .then(console.log);
   }, [])
+
+  // Sepete Urun Ekleme
+  const addToCart = (recipe) => {
+    setCart((prev) => {
+
+      // Eklenmek Istenilen Item Sepette Var Mi Kontrolu Yapiyoruz
+      const existing = prev.find((item) => item.id === recipe.id);
+      if (existing) {
+
+        // Eklenmek Istenilen Urun Sepette Varsa Sepetteki urun Adedini Artiriyoruz
+        return prev.map((item) =>
+          item.id === recipe.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      }
+
+      // Eklenmek Istenilen Urun Sepette Yoksa Sepete Ekliyoruz
+      return [...prev, { ...recipe, quantity: 1 }];
+    })
+  }
 
   return (
     <>
