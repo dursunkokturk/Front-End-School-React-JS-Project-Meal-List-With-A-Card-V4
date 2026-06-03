@@ -369,12 +369,13 @@ body {
 }
 
 .quantity-count {
-  color: #C73B0F;
+  color: white;
   font-weight: 700;
   font-size: 14px;
 }
 
-.cart-quantity-controls {
+.cart-quantity-controls .quantity-count{
+  color: #C73B0F;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -402,6 +403,71 @@ body {
   justify-content: space-between;
   gap: 12px;
   margin-top: 4px;
+}
+
+/* ─── SEPET ITEM ─── */
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #F5EEEC;
+  gap: 12px;
+}
+
+.cart-item-info{
+  flex: 1;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.cart-item-name {
+  font-weight: 600;
+  color: #260F08;
+  font-size: 14px;
+}
+
+/* ✅ Sil butonu */
+.remove-button {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid #87635A;
+  background: transparent;
+  color: #87635A;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.remove-button:hover {
+  border-color: #260F08;
+  color: #260F08;
+}
+
+.cart-quantity-button:hover {
+  background-color: #C73B0F;
+  color: white;
+}
+
+.cart-item-price {
+  font-weight: 700;
+  color: #260F08;
+  font-size: 14px;
 }
 
 @media(width>767px) {
