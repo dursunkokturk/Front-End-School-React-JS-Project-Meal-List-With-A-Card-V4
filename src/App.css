@@ -28,7 +28,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .error-icon {
@@ -97,6 +99,11 @@ body {
 
 .container .food-card .product-informations .image-wrapper button:active {
   background-color: #C73B0F;
+}
+
+.container .food-card .product-informations .image-wrapper .product-photo-active {
+  outline: 3px solid #C73B0F;
+  outline-offset: 0px;
 }
 
 .container .food-card .product-informations .add-to-cart-button {
@@ -429,7 +436,7 @@ body {
   font-size: 14px;
 }
 
-.cart-quantity-controls .quantity-count{
+.cart-quantity-controls .quantity-count {
   color: #C73B0F;
   display: flex;
   align-items: center;
@@ -471,7 +478,7 @@ body {
   gap: 12px;
 }
 
-.cart-item-info{
+.cart-item-info {
   flex: 1;
 }
 

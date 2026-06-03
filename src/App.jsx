@@ -184,7 +184,10 @@ export default function App() {
               return (
                 <div key={recipe.id} className='product-informations'>
                   <div className="image-wrapper">
-                    <img src={recipe.image} className='product-photo' alt={recipe.name} />
+                    <img
+                      src={recipe.image}
+                      className={`product-photo ${cartItem ? 'product-photo-active' : ''}`}
+                      alt={recipe.name} />
 
                     {/* Urun Sepette Yoksa Ekliyoruz
                         Urun Sepette Varsa Adet Artiriyoruz */}
