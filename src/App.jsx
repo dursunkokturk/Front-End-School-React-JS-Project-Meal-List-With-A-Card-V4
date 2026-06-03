@@ -49,6 +49,7 @@ export default function App() {
   const [recipes, setRecipes] = useState([]);
   const [cart, setCart] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showThankyou, setShowThankyou] = useState(false);
 
   // fetch Islemini Yonetmek Icin 
   // useEffect Icinden Cikarip 
@@ -136,7 +137,13 @@ export default function App() {
   const handleConfirmOrder = () => {
     setShowModal(false);
     setCart([]);
+    setShowThankyou(true);
   }
+
+  const handleNewOrder=()=>{
+    setShowThankyou(false);
+  }
+
   if (loading) {
     return (
       <div className="status-screen">
@@ -169,6 +176,22 @@ export default function App() {
           totalItems={totalItems}
           onClose={handleConfirmOrder}
         />
+      )}
+
+      {showThankyou && (
+        <div className="thankyou-overlay">
+          <div className="thankyou-card">
+            <div className="thankyou-icon">✔</div>
+            <h2 className="thankyou-title">Thank You!</h2>
+            <p className="thankyou-subtitle">Your order has been received. Enjoy your meal! 🍽️</p>
+            <button 
+              className='thankyou-button'
+              onClick={handleNewOrder}
+            >
+              Please A New Order
+            </button>
+          </div>
+        </div>
       )}
       <div className="container">
         <div className="general-title">
