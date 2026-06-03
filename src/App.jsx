@@ -10,11 +10,44 @@ const generatePrice = (id) => {
   return Number((base + 5 + 0.99).toFixed(2));
 };
 
+function OrderConfirmedModal({ cart, totalItems, onClose }) {
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <div className="modal-icon">✔</div>
+        <h2 className="modal-title">Order Confirmed</h2>
+        <p className="modal-subtitle">We hope it made your day!</p>
+        <div className="modal-items">
+          {cart.map((item) => (
+            <div key={item.id} className="modal-item">
+              <img src={item.image} alt={item.name} className='modal-item-img' />
+              <div className="modal-item-info">
+                <p className="modal-item-name">{item.name}</p>
+                <span className="modal-item-quantity">{item.quantity}x</span>
+                <span className="modal-item-unit-price">@ ${item.price.toFixed(2)}</span>
+              </div>
+                <span className="modal-item-total">${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+          ))}
+          <div className="modal-total">
+            <span>Order Total</span>
+            <strong>${totalPrice.toFixed(2)}</strong>
+          </div>
+        </div>
+        <button className='modal-btn' onClick={onClose}>Start New Order</button>
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
 
   const [loading, setLoading] = useState(true);
   const [recipes, setRecipes] = useState([]);
   const [cart, setCart] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch('https://dummyjson.com/recipes')
@@ -58,6 +91,15 @@ export default function App() {
   // Sepetteki Toplam Urun Sayisi
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const handleConfirmOrder = () => {
+    setShowModal(false);
+    setCart([]);
+  }
   if (loading) {
     return (
       <div className="loading">
@@ -68,6 +110,13 @@ export default function App() {
 
   return (
     <>
+      {showModal && (
+        <OrderConfirmedModal
+          cart={cart}
+          totalItems={totalItems}
+          onClose={handleConfirmOrder}
+        />
+      )}
       <div className="container">
         <div className="general-title">
           <h1>Meals</h1>
@@ -99,25 +148,41 @@ export default function App() {
                 <h5>Your added items will appear here</h5>
               </div>
             ) : (
-              <div className="cart-items">
-                {cart.map((item) => (
-                  <div key={item.id} className="cart-item">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className='cart-item-img'
-                    />
-                    <div className="cart-item-info">
-                      <p className='cart-item-name'>{item.name}</p>
-                      <span className='cart-item-cuisine'>{item.cuisine}</span>
-                      <div className="cart-item-bottom">
-                        <span className='cart-item-quantity'>{item.quantity}</span>
-                        <span className='cart-item-price'>${(item.price * item.quantity).toFixed(2)}</span>
+              <>
+                <div className="cart-items">
+                  {cart.map((item) => (
+                    <div key={item.id} className="cart-item">
+                      {/* <img
+                        src={item.image}
+                        alt={item.name}
+                        className='cart-item-img'
+                      /> */}
+                      <div className="cart-item-info">
+                        <p className='cart-item-name'>{item.name}</p>
+                        {/* <span className='cart-item-cuisine'>{item.cuisine}</span> */}
+                        <div className="cart-item-bottom">
+                          <span className='cart-item-quantity'>{item.quantity}x</span>
+                          <span className='cart-item-price'>@ {(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
                       </div>
                     </div>
+                  ))}
+                </div>
+
+                {/* Toplam Fiyat ve Onaylama */}
+                <div className="cart-footer">
+                  <div className="cart-total">
+                    <span>Order Total</span>
+                    <strong>${totalPrice.toFixed(2)}</strong>
                   </div>
-                ))}
-              </div>
+                  <button
+                    className="confirm-btn"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Confirm Order
+                  </button>
+                </div>
+              </>
             )}
           </div>
         </div>
