@@ -499,7 +499,7 @@ body {
   font-size: 14px;
 }
 
-/* ✅ Sil butonu */
+/* Sil butonu */
 .remove-button {
   width: 20px;
   height: 20px;
@@ -514,6 +514,10 @@ body {
   justify-content: center;
   flex-shrink: 0;
   transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.remove-button:active {
+  background-color: #C73B0F;
 }
 
 .remove-button:hover {
@@ -704,6 +708,10 @@ body {
   .cart-quantity-button:hover {
     background-color: #C73B0F;
     color: white;
+  }
+
+  .remove-button:hover{
+    background-color: #C73B0F;
   }
 
   .thankyou-overlay {
