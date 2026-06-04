@@ -71,6 +71,7 @@ export default function App() {
       .catch((error) => {
         console.error(error);
         setLoading(false)
+        setError(true)
       });
     // .then(console.log);
   }
