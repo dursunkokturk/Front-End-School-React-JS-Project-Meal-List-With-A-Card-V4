@@ -355,7 +355,7 @@ body {
   background-color: #952C0B;
 }
 
-.add-to-cart-button,
+.container .food-card .product-informations .add-to-cart-button,
 .quantity-controls {
   position: absolute;
   bottom: -22px;
@@ -365,7 +365,7 @@ body {
 }
 
 /* Add to Cart butonu Mevcut Stili Koruyoruz */
-.add-to-cart-button {
+.container .food-card .product-informations .add-to-cart-button {
   font-size: 14px;
   font-weight: 600;
   display: flex;
@@ -382,17 +382,17 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.add-to-cart-button:hover {
+.container .food-card .product-informations .add-to-cart-button:hover {
   background-color: #C73B0F;
   color: white;
 }
 
-.add-to-cart-button:active {
+.container .food-card .product-informations .add-to-cart-button:active {
   background-color: #952C0B;
   color: white;
 }
 
-.add-to-cart-button img {
+.container .food-card .product-informations .add-to-cart-button img {
   width: 20px;
   height: 20px;
 }
@@ -501,7 +501,7 @@ body {
 }
 
 /* Sil butonu */
-.remove-button {
+.container .food-card-and-order-card .order-card .cart-items .cart-item .remove-button {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -517,13 +517,13 @@ body {
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.remove-button:active {
+.container .food-card-and-order-card .order-card .cart-items .cart-item .remove-button:active {
   background-color: #C73B0F;
 }
 
-.remove-button:hover {
-  border-color: #260F08;
-  color: #260F08;
+.container .food-card-and-order-card .order-card .cart-items .cart-item .remove-button:hover {
+  background-color: #C73B0F;
+  color: white;
 }
 
 .cart-quantity-button:hover {
@@ -682,7 +682,7 @@ body {
   .container .food-card .product-informations .image-wrapper {
     height: 212px;
   }
-  
+
   .container .food-card .product-informations .image-wrapper button:hover {
     background-color: #C73B0F;
     cursor: pointer;
@@ -706,7 +706,7 @@ body {
     color: white;
   }
 
-  .remove-button:hover{
+  .remove-button:hover {
     background-color: #C73B0F;
   }
 
